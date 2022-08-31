@@ -7,15 +7,22 @@ return random_Choice;
 function playRound(playerChoice, computerChoice) {
     playerChoice = playerChoice.toLowerCase();
     if (playerChoice === computerChoice) {
-        return "Tie!";
+        return alert("Tie!");
     }
     else if (playerChoice === 'rock' && computerChoice === 'paper' || playerChoice === 'paper' && computerChoice === 'scissors' || playerChoice === 'scissors' && computerChoice === 'rock') {
-        return `You Lose! ${computerChoice} beats ${playerChoice}`;
+        return alert(`You Lose! ${computerChoice} beats ${playerChoice}`);
     }
     
     else {
-        return `You Win! ${playerChoice} beats ${computerChoice}!`
+        return alert(`You Win! ${playerChoice} beats ${computerChoice}!`);
     }
 }
 
+function game() {
+    for(let i = 0; i <5; i++) {
+        playRound(prompt('Welcome to rock paper scissors. Input your choice: '), getComputerChoice());
+    }
+
+}
+game();
 
