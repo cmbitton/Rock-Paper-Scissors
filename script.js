@@ -15,12 +15,12 @@ function playRound(playerChoice, computerChoice) {
         keepScore('tie');
     }
     else if (playerChoice === 'rock' && computerChoice === 'paper' || playerChoice === 'paper' && computerChoice === 'scissors' || playerChoice === 'scissors' && computerChoice === 'rock') {
-        results.textContent = `You Lose! ${computerChoice} beats ${playerChoice}`;
+        results.textContent = `You Lose! ${computerChoice.charAt(0).toUpperCase() + computerChoice.slice(1)} beats ${playerChoice.charAt(0).toUpperCase() + playerChoice.slice(1)}!`;
         keepScore('lose');
     }
     
     else {
-        results.textContent = `You Win! ${playerChoice} beats ${computerChoice}!`;
+        results.textContent = `You Win! ${playerChoice.charAt(0).toUpperCase() + playerChoice.slice(1)} beats ${computerChoice.charAt(0).toUpperCase() + computerChoice.slice(1)}!`;
         keepScore('win');
     }
 }
@@ -46,10 +46,12 @@ function keepScore(result){
 function checkForWin(){
     const results = document.querySelector('.game-results');
     if(wins >= 5){
-        results.textContent = `You beat the computer with a score of ${wins} to ${losses}! Choose an object to start playing another game!`
+        results.innerText = `You beat the computer with a score of ${wins} to ${losses}! 
+        Choose an object to start playing another game!`
     }
     else if(losses >= 5){
-        results.textContent = `The computer beat you with a score of ${losses} to ${wins}! Choose an object to start playing another game!`
+        results.innerText = `The computer beat you with a score of ${losses} to ${wins}! 
+        Choose an object to start playing another game!`
     }
 }
 function resetScore(){
@@ -60,11 +62,15 @@ function resetScore(){
 }
 
 function game() {
-    const buttons = document.querySelectorAll('button');
-    for(const button of buttons){
-        button.addEventListener('click', (e) => {
+    const images = document.querySelectorAll('img');
+    for(const img of images){
+        img.addEventListener('mousedown', (e) => {
+            e.target.classList.toggle('click');
+        })
+        img.addEventListener('mouseup', (e) => {
+            e.target.classList.toggle('click');
             resetScore();
-            playRound(e.target.textContent.toLowerCase(), getComputerChoice());
+            playRound(e.target.id.toLowerCase(), getComputerChoice());
             checkForWin();
         })
     }
